@@ -1,0 +1,23 @@
+url: https://nullpointerexception1.wordpress.com/
+server:
+  maxThreads: 17
+  applicationConnectors:
+    - type: http
+      port: 8000
+      useForwardedHeaders: false
+      acceptorThreads: 3
+      selectorThreads: 6
+  adminConnectors:
+    - type: http
+      port: 8001
+      acceptorThreads: 1
+      selectorThreads: 1
+database:
+  driverClass: com.mysql.jdbc.Driver
+  user: root
+  password: root
+  url: jdbc:mysql://10.33.37.76:3306/assignment?createDatabaseIfNotExist=true&useSSL=false
+  properties:
+    charSet: UTF-8
+    hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate.hbm2ddl.auto: create
