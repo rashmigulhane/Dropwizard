@@ -14,9 +14,9 @@ server:
       selectorThreads: 1
 database:
   driverClass: com.mysql.jdbc.Driver
-  user: root
-  password: root
-  url: jdbc:mysql://10.33.37.76:3306/assignment?createDatabaseIfNotExist=true&useSSL=false
+  user: xxxx
+  password: xxxx
+  url: jdbc:mysql://10.33.xx.xx:3306/assignment?createDatabaseIfNotExist=true&useSSL=false
   properties:
     charSet: UTF-8
     hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
