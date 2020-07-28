@@ -8,19 +8,14 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public class UserDAO extends AbstractDAO<User> {
+public class UserDAO {
 
-    @Inject
-    public UserDAO(SessionFactory sessionFactory) {
-
-        super(sessionFactory);
-    }
 
     public User addUser(User user) {
-        return persist(user);
+        return null;
     }
 
     public User getUser(String username) {
-        return get(username);
+        return null;
     }
 }

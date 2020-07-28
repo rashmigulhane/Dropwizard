@@ -12,7 +12,6 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
 public class ApplicationDriver extends Application<ProjectConfiguration> {
-    private HibernateBundle<ProjectConfiguration> hibernate;
 
     public static void main(String args[]) throws Exception {
         new ApplicationDriver().run(args);
@@ -20,17 +19,11 @@ public class ApplicationDriver extends Application<ProjectConfiguration> {
 
     @Override
     public void run(ProjectConfiguration projectConfiguration, Environment environment) {
-        Injector injector = Guice.createInjector(new ApplicationModule(hibernate));
-        System.out.println("your configurations are " + projectConfiguration.getUrl());
+        Injector injector = Guice.createInjector(new ApplicationModule());
         environment.jersey().register(injector.getInstance(UserResource.class));
     }
 
-    @Override
-    public void initialize(Bootstrap<ProjectConfiguration> bootstrap) {
-        hibernate = buildHibernateBundle();
-        bootstrap.addBundle(hibernate);
 
-    }
 
     private HibernateBundle<ProjectConfiguration> buildHibernateBundle() {
         return new HibernateBundle<ProjectConfiguration>(User.class) {

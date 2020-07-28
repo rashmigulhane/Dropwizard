@@ -15,22 +15,16 @@ import java.io.File;
 import java.io.IOException;
 
 @RequiredArgsConstructor
-@AllArgsConstructor
 public class ApplicationModule extends AbstractModule {
-    private HibernateBundle<ProjectConfiguration> hibernateBundle;
+
 
     @Override
     protected void configure() {
 
     }
 
-    @Provides
-    @Singleton
-    public SessionFactory getSessionFactory() {
-        return hibernateBundle.getSessionFactory();
-    }
 
-    @Provides
+   /* @Provides
     @Singleton
     public Configuration getConfiguration() {
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_27);
@@ -44,5 +38,5 @@ public class ApplicationModule extends AbstractModule {
             e.printStackTrace();
         }
         return configuration;
-    }
+    }*/
 }

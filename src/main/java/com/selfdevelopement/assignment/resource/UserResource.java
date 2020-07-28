@@ -17,13 +17,25 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.microsoft.applicationinsights.TelemetryClient;
+
 @Path("/")
 @Singleton
 @RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class UserResource {
     private final UserAPI userAPI;
     private final Configuration configuration;
+    private TelemetryClient telemetry = new TelemetryClient();
 
+
+    @GET
+    @Timed
+    @Path("/")
+    @UnitOfWork
+    public String welcome() {
+        telemetry.trackMetric("queueLength", 42.0);
+        return "Hey welcome";
+    }
 
     @POST
     @Timed
