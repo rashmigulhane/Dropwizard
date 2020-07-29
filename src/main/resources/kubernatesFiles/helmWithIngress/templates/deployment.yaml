@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azure-vote-front16
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: azure-vote-front16
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: azure-vote-front16
+    spec:
+      containers:
+        - name: azure-vote-front16
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: 10m
+            limits:
+              cpu: 20m
+          env:
+            - name: REDIS
+              value: "azure-vote-back"
