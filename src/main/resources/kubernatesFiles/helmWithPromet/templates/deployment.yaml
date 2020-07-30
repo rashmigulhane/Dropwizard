@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: azure-vote-front16
+  name: azure-vote-front17
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: azure-vote-front16
+      app: azure-vote-front17
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -15,12 +15,13 @@ spec:
   template:
     metadata:
       annotations:
-        prometheus:io/scrape:true
+        prometheus:io/scrape: "true"
+        prometheus.io/port: "8001"
       labels:
-        app: azure-vote-front16
+        app: azure-vote-front17
     spec:
       containers:
-        - name: azure-vote-front16
+        - name: azure-vote-front17
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - containerPort: 8000
