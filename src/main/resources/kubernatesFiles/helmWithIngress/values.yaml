@@ -9,6 +9,7 @@ image:
   tag: v3
   pullPolicy: IfNotPresent
 
+dnsName: 7fa76087251e41cc9034.centralus.aksapp.io
 nameOverride: ""
 fullnameOverride: ""
 

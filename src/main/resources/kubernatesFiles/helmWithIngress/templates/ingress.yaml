@@ -6,7 +6,7 @@ metadata:
     kubernetes.io/ingress.class: addon-http-application-routing
 spec:
   rules:
-    - host: azure-vote-front16.7fa76087251e41cc9034.centralus.aksapp.io
+    - host: azure-vote-front16.{{ .Values.dnsName }}
       http:
         paths:
           - path: /
