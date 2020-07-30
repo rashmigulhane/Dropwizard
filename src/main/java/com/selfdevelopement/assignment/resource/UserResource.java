@@ -1,11 +1,16 @@
 package com.selfdevelopement.assignment.resource;
 
+import com.codahale.metrics.Counter;
+import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.annotation.Gauge;
+import com.codahale.metrics.annotation.Metered;
 import com.codahale.metrics.annotation.Timed;
 import com.selfdevelopement.assignment.api.UserAPI;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import io.dropwizard.hibernate.UnitOfWork;
 import lombok.RequiredArgsConstructor;
+
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -25,7 +30,11 @@ import com.microsoft.applicationinsights.TelemetryClient;
 public class UserResource {
     private final UserAPI userAPI;
     private final Configuration configuration;
+    private final MetricRegistry metrics;
     private TelemetryClient telemetry = new TelemetryClient();
+
+    // Create a Dropwizard counter.
+
 
 
     @GET
@@ -34,6 +43,20 @@ public class UserResource {
     @UnitOfWork
     public String welcome() {
         telemetry.trackMetric("queueLength", 42.0);
+        return "Hey welcome";
+    }
+
+
+    @GET
+    @Timed
+    @Path("/PPM")
+    @Gauge
+    @Metered
+    @UnitOfWork
+    public String emitingPrometheus() {
+        Counter counter = metrics.counter("my_example_counter_total");
+        counter.inc();
+
         return "Hey welcome";
     }
 

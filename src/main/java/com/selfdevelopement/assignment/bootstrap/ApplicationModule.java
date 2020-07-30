@@ -1,18 +1,16 @@
 package com.selfdevelopement.assignment.bootstrap;
 
+import com.codahale.metrics.MetricRegistry;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import com.selfdevelopement.assignment.config.ProjectConfiguration;
-import freemarker.template.Configuration;
-import freemarker.template.TemplateExceptionHandler;
-import io.dropwizard.hibernate.HibernateBundle;
+
+import io.dropwizard.setup.Environment;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.SessionFactory;
-
-import java.io.File;
-import java.io.IOException;
+import io.prometheus.client.exporter.MetricsServlet;
+import io.prometheus.client.CollectorRegistry;
+import io.prometheus.client.dropwizard.DropwizardExports;
 
 @RequiredArgsConstructor
 public class ApplicationModule extends AbstractModule {
@@ -21,6 +19,20 @@ public class ApplicationModule extends AbstractModule {
     @Override
     protected void configure() {
 
+    }
+
+
+
+    @Provides
+    @Singleton
+    public MetricRegistry provideRegistry( Environment environment ) {
+
+        CollectorRegistry collectorRegistry = new CollectorRegistry();
+        MetricRegistry metricRegistry = environment.metrics();
+        collectorRegistry.register(new DropwizardExports(metricRegistry));
+        environment.admin().addServlet("metrics", new MetricsServlet(collectorRegistry))
+                .addMapping("/metrics");
+        return metricRegistry;
     }
 
 
