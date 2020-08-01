@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: externalizatn.azurecr.io/application
-  tag: v4
+  tag: v5
   pullPolicy: IfNotPresent
 
 nameOverride: ""
