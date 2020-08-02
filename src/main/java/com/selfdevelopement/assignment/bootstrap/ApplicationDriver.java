@@ -7,6 +7,7 @@ import com.selfdevelopement.assignment.config.ProjectConfiguration;
 import com.selfdevelopement.assignment.db.entities.User;
 import com.selfdevelopement.assignment.resource.QueueResources;
 import com.selfdevelopement.assignment.resource.UserResource;
+import com.selfdevelopement.assignment.resource.UserToQueueResource;
 import io.dropwizard.Application;
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
@@ -35,6 +36,8 @@ public class ApplicationDriver extends Application<ProjectConfiguration> {
         Injector injector = Guice.createInjector(new ApplicationModule());
         environment.jersey().register(injector.getInstance(UserResource.class));
         environment.jersey().register(injector.getInstance(QueueResources.class));
+        environment.jersey().register(injector.getInstance(UserToQueueResource.class));
+
     }
 
 
