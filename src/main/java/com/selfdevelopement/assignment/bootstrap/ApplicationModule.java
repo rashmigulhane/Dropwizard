@@ -23,18 +23,6 @@ public class ApplicationModule extends AbstractModule {
 
 
 
-    @Provides
-    @Singleton
-    public MetricRegistry provideRegistry( Environment environment ) {
-
-        CollectorRegistry collectorRegistry = new CollectorRegistry();
-        MetricRegistry metricRegistry = environment.metrics();
-        collectorRegistry.register(new DropwizardExports(metricRegistry));
-        environment.admin().addServlet("metrics", new MetricsServlet(collectorRegistry))
-                .addMapping("/metrics");
-        return metricRegistry;
-    }
-
 
    /* @Provides
     @Singleton

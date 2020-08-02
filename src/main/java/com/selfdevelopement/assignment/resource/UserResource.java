@@ -30,7 +30,7 @@ import com.microsoft.applicationinsights.TelemetryClient;
 public class UserResource {
     private final UserAPI userAPI;
     private final Configuration configuration;
-    private final MetricRegistry metrics;
+
     private TelemetryClient telemetry = new TelemetryClient();
 
     // Create a Dropwizard counter.
@@ -48,15 +48,11 @@ public class UserResource {
 
 
     @GET
-    @Timed
+    @Timed(name = "time")
     @Path("/PPM")
-    @Gauge
-    @Metered
+    @Metered(name = "meteredd")
     @UnitOfWork
     public String emitingPrometheus() {
-        Counter counter = metrics.counter("my_example_counter_total");
-        counter.inc();
-
         return "Hey welcome";
     }
 

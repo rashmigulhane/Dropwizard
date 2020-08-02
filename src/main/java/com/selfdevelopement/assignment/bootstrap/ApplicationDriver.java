@@ -1,5 +1,6 @@
 package com.selfdevelopement.assignment.bootstrap;
 
+import com.codahale.metrics.MetricRegistry;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.selfdevelopement.assignment.config.ProjectConfiguration;
@@ -10,6 +11,11 @@ import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.prometheus.client.CollectorRegistry;
+import io.prometheus.client.dropwizard.DropwizardExports;
+import io.prometheus.client.exporter.MetricsServlet;
+
+
 
 public class ApplicationDriver extends Application<ProjectConfiguration> {
 
@@ -19,6 +25,12 @@ public class ApplicationDriver extends Application<ProjectConfiguration> {
 
     @Override
     public void run(ProjectConfiguration projectConfiguration, Environment environment) {
+        CollectorRegistry collectorRegistry = new CollectorRegistry();
+               MetricRegistry metricRegistry = environment.metrics();
+             collectorRegistry.register(new DropwizardExports(metricRegistry));
+              environment.admin().addServlet("metrics", new MetricsServlet(collectorRegistry))
+                      .addMapping("/metrics");
+
         Injector injector = Guice.createInjector(new ApplicationModule());
         environment.jersey().register(injector.getInstance(UserResource.class));
     }
