@@ -35,8 +35,6 @@ public class UserResource {
 
     // Create a Dropwizard counter.
 
-
-
     @GET
     @Timed
     @Path("/")

@@ -5,6 +5,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.selfdevelopement.assignment.config.ProjectConfiguration;
 import com.selfdevelopement.assignment.db.entities.User;
+import com.selfdevelopement.assignment.resource.QueueResources;
 import com.selfdevelopement.assignment.resource.UserResource;
 import io.dropwizard.Application;
 import io.dropwizard.db.PooledDataSourceFactory;
@@ -33,6 +34,7 @@ public class ApplicationDriver extends Application<ProjectConfiguration> {
 
         Injector injector = Guice.createInjector(new ApplicationModule());
         environment.jersey().register(injector.getInstance(UserResource.class));
+        environment.jersey().register(injector.getInstance(QueueResources.class));
     }
 
 
