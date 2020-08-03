@@ -2,9 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: azure-vote-front17
-  annotations:
-    prometheus.io/scrape: "true"
-    prometheus.io/port: "8001"
 spec:
   replicas: 1
   selector:
@@ -19,6 +16,9 @@ spec:
     metadata:
       labels:
         app: azure-vote-front17
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8001"
     spec:
       containers:
         - name: azure-vote-front17
