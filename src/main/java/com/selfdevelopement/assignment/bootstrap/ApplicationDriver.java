@@ -27,6 +27,11 @@ public class ApplicationDriver extends Application<ProjectConfiguration> {
 
     @Override
     public void run(ProjectConfiguration projectConfiguration, Environment environment) {
+
+        /**
+         * Adding Prometheus Exporter
+         * This will intercept all the jmx metrics and convert into format which prometheus wants
+         */
         CollectorRegistry collectorRegistry = new CollectorRegistry();
                MetricRegistry metricRegistry = environment.metrics();
              collectorRegistry.register(new DropwizardExports(metricRegistry));
