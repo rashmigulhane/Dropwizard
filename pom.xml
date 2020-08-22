@@ -145,7 +145,7 @@
                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                            <!-- <mainClass>com.selfdevelopement.assignment.bootstrap.ApplicationDriver</mainClass>-->
 
-                            <mainClass>com.selfdevelopement.assignment.bootstrap.ApplicationDriver</mainClass>
+                            <mainClass>com.selfdevelopement.assignment.bootstrap.HelloWorld</mainClass>
                         </transformer>
                     </transformers>
                 </configuration>
