@@ -59,6 +59,6 @@ public final class SettingFields extends ExpandableStringEnum<SettingFields> {
      * @return the corresponding {@link SettingFields}
      */
     public static SettingFields fromString(String name) {
-        return fromString(name);
+        return fromString(name, SettingFields.class);
     }
 }
